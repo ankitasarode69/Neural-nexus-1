@@ -1,131 +1,147 @@
-/* ---------- Global Styles ---------- */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Heritage Color Palette */
+    --background: 35 25% 97%;
+    --foreground: 25 20% 15%;
+
+    --card: 35 30% 95%;
+    --card-foreground: 25 20% 15%;
+
+    --popover: 35 30% 95%;
+    --popover-foreground: 25 20% 15%;
+
+    --primary: 35 50% 25%;
+    --primary-foreground: 35 25% 97%;
+
+    --secondary: 40 35% 85%;
+    --secondary-foreground: 25 20% 15%;
+
+    --muted: 40 20% 90%;
+    --muted-foreground: 25 15% 45%;
+
+    --accent: 45 80% 65%;
+    --accent-foreground: 25 20% 15%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 35 25% 97%;
+
+    --border: 40 15% 85%;
+    --input: 40 15% 85%;
+    --ring: 45 80% 65%;
+
+    /* Heritage Specific Colors */
+    --heritage-gold: 45 80% 65%;
+    --heritage-bronze: 30 40% 40%;
+    --heritage-stone: 40 15% 75%;
+    --heritage-earth: 25 30% 35%;
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--heritage-bronze)));
+    --gradient-gold: linear-gradient(135deg, hsl(var(--heritage-gold)), hsl(45 60% 55%));
+    --gradient-stone: linear-gradient(180deg, hsl(var(--background)), hsl(var(--heritage-stone)));
+
+    /* Shadows */
+    --shadow-heritage: 0 10px 30px -10px hsl(var(--heritage-bronze) / 0.3);
+    --shadow-gold: 0 0 40px hsl(var(--heritage-gold) / 0.2);
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    /* Dark Heritage Theme */
+    --background: 25 20% 8%;
+    --foreground: 35 25% 95%;
+
+    --card: 25 25% 10%;
+    --card-foreground: 35 25% 95%;
+
+    --popover: 25 25% 10%;
+    --popover-foreground: 35 25% 95%;
+
+    --primary: 45 80% 65%;
+    --primary-foreground: 25 20% 8%;
+
+    --secondary: 30 15% 20%;
+    --secondary-foreground: 35 25% 95%;
+
+    --muted: 25 10% 15%;
+    --muted-foreground: 35 15% 65%;
+
+    --accent: 45 80% 65%;
+    --accent-foreground: 25 20% 8%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 35 25% 95%;
+
+    --border: 30 10% 25%;
+    --input: 30 10% 25%;
+    --ring: 45 80% 65%;
+
+    /* Dark Heritage Colors */
+    --heritage-gold: 45 70% 60%;
+    --heritage-bronze: 30 30% 45%;
+    --heritage-stone: 35 10% 30%;
+    --heritage-earth: 25 20% 40%;
+
+    --gradient-hero: linear-gradient(135deg, hsl(var(--heritage-earth)), hsl(var(--heritage-bronze)));
+    --gradient-gold: linear-gradient(135deg, hsl(var(--heritage-gold)), hsl(45 50% 50%));
+    --gradient-stone: linear-gradient(180deg, hsl(var(--background)), hsl(var(--heritage-stone)));
+
+    --shadow-heritage: 0 10px 30px -10px hsl(var(--heritage-gold) / 0.2);
+    --shadow-gold: 0 0 40px hsl(var(--heritage-gold) / 0.3);
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
 }
 
-body {
-  background: linear-gradient(135deg, #1f1f1f, #2d2d2d);
-  color: #fff;
-  line-height: 1.6;
-}
+@layer base {
+  * {
+    @apply border-border;
+  }
 
-/* ---------- Navbar ---------- */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 50px;
-  background: rgba(0, 0, 0, 0.6);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
+  body {
+    @apply bg-background text-foreground scroll-smooth;
+  }
 
-.navbar a {
-  color: #fff;
-  margin: 0 15px;
-  text-decoration: none;
-  font-weight: 500;
-  transition: 0.3s;
-}
+  .section-fade-in {
+    @apply opacity-0 translate-y-8 transition-all duration-700;
+  }
+  
+  .section-fade-in.visible {
+    @apply opacity-100 translate-y-0;
+  }
 
-.navbar a:hover {
-  color: #6f00ff;
-}
-
-/* ---------- Hero Section ---------- */
-.hero {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 0 20px;
-  background: url('your-background.jpg') no-repeat center/cover;
-}
-
-.hero h1 {
-  font-size: 3rem;
-  margin-bottom: 15px;
-  color: #ff0033;
-  text-shadow: 2px 2px 5px #000;
-}
-
-.hero p {
-  font-size: 1.2rem;
-  max-width: 600px;
-  margin-bottom: 25px;
-}
-
-.hero button {
-  padding: 12px 25px;
-  border: none;
-  background: #7700ff;
-  color: #fff;
-  border-radius: 30px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: 0.3s;
-}
-
-.hero button:hover {
-  background: #e6008e;
-  transform: scale(1.05);
-}
-
-/* ---------- Section ---------- */
-section {
-  padding: 60px 80px;
-  text-align: center;
-}
-
-section h2 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  color: #ff9800;
-}
-
-section p {
-  max-width: 700px;
-  margin: auto;
-  margin-bottom: 30px;
-  color: #ddd;
-}
-
-/* ---------- Card Layout ---------- */
-.card-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 25px;
-}
-
-.card {
-  background: #2e2e2e;
-  padding: 20px;
-  border-radius: 15px;
-  box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
-  transition: 0.3s;
-}
-
-.card:hover {
-  transform: translateY(-10px);
-  background: #3a3a3a;
-}
-
-/* ---------- Footer ---------- */
-footer {
-  background: #111;
-  padding: 20px;
-  text-align: center;
-  color: #aaa;
-}
-
-footer a {
-  color: #ff9800;
-  margin: 0 10px;
-  text-decoration: none;
+  .heritage-text-gradient {
+    @apply bg-gradient-to-r from-heritage-gold to-heritage-bronze bg-clip-text text-transparent;
+  }
 }
